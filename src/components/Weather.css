@@ -1,0 +1,144 @@
+.weather{
+    place-self: center;
+    border-radius: 10px;
+    padding: 40px;
+    background-image: linear-gradient(45deg, #2f4680, #500ae4);
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.searchBar{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+}
+
+.searchBar input{
+    height: 50px;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    padding-left: 25px;
+    color: #626262;
+    background: #ebfffc;
+    font-size: 18px;
+
+}
+
+.searchBar img{
+    width: 50px;
+    padding: 15px;
+    border-radius: 50%;
+    background: #ebfffc;
+    cursor: pointer;
+
+}
+
+.weatherIcon{
+    width: 150px;
+    margin: 30px 0;
+
+}
+
+.temperature{
+    color: #fff;
+    font-size: 80px;
+    line-height: 1;
+
+}
+
+.location{
+    color: #fff;
+    font-size: 40px;
+}
+
+.weatherData{
+    width: 100%;
+    margin-top: 40px;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+}
+
+.weatherData .col{
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 22px;
+}
+
+.weatherData .col span{
+    display: block;
+    font-size: 16px;
+}
+
+.weatherData .col img{
+    width: 26px;
+    margin-top: 10px;
+}
+
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+  
+  /* Hide default HTML checkbox */
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: #2196F3;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
