@@ -18,7 +18,7 @@ const Weather = () => {
         }
       };
     const [weatherData, setWeatherData] = useState(false);
-    const [unit, setUnit] = useState('metric'); // 'metric' for Celsius, 'imperial' for Fahrenheit
+    const [unit, setUnit] = useState('celsius'); // celsius or fahrenheit
 
     const allIcons = {
         "01d" : clearIcon,
@@ -45,7 +45,7 @@ const Weather = () => {
         }
 
         try {
-            const weatherUrl =`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${unit}&appid=${import.meta.env.VITE_APP_ID}`;
+            const weatherUrl =`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${import.meta.env.VITE_APP_ID}`;
 
             const response = await fetch(weatherUrl);
             const data = await response.json();
@@ -75,14 +75,17 @@ const Weather = () => {
 
     useEffect(()=>{
         search("Vancouver");
-    },[unit])
+    },[])
 
     const toggleUnit = () => {
-        setUnit(prev => prev === 'metric' ? 'imperial' : 'metric');
+        setUnit(prev => prev === 'celsius' ? 'fahrenheit' : 'celsius');
     };
 
-    const displayUnit = unit === 'metric' ? '°C' : '°F';
-    const windUnit = unit === 'metric' ? 'Km/h' : 'mph';
+    const convertTemperature = (tempC) => {
+        return unit === 'celsius'
+            ? `${Math.round(tempC)}°C`
+            : `${Math.round((tempC * 9) / 5 + 32)}°F`;
+    };
 
   return (
     <div className='weather'>
@@ -91,16 +94,16 @@ const Weather = () => {
             <img src={searchIcon} alt="searchIcon" onClick={()=>search(inputRef.current.value)}/>
             <div className="unit-toggle">
                 <label className="switch">
-                    <input type="checkbox" onChange={toggleUnit} checked={unit === 'imperial'} />
+                    <input type="checkbox" onChange={toggleUnit} checked={unit === 'fahrenheit'} />
                     <span className="slider round"></span>
                 </label>
-                <span>{unit === 'metric' ? ' Celsius' : ' Fahrenheit'}</span>
+                <span>{unit === 'celsius' ? ' Celsius' : ' Fahrenheit'}</span>
             </div>
         </div>
         {weatherData?<>
 
         <img src={weatherData.icon} alt="clearIcon" className='weatherIcon'/>
-        <p className='temperature'>{weatherData.temperature} {displayUnit}</p>
+        <p className='temperature'>{convertTemperature(weatherData.temperature)}</p>
         <p className='location'>{weatherData.location}</p>
         <div className='weatherData'>
             <div className='col'>
@@ -113,7 +116,7 @@ const Weather = () => {
             <div className='col'>
                 <img src={windIcon} alt="" />
                 <div>
-                    <p> {weatherData.windSpeed} {windUnit}</p>
+                    <p> {weatherData.windSpeed} Km/h</p>
                     <span>Wind Speed</span>
                 </div>
             </div>
